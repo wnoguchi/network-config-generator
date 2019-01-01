@@ -8,6 +8,7 @@ env = Environment(loader=FileSystemLoader('templates/'))
 node_template = env.get_template('cisco/router.j2')
 output_template = env.get_template('output-templates/dokuwiki.j2')
 
+mask16 = '255.255.0.0'
 mask24 = '255.255.255.0'
 mask32 = '255.255.255.255'
 
@@ -122,13 +123,18 @@ params = {
                     'mask': mask32,
                 },
                 {
+                    'name': 'Loopback 2',
+                    'address': '30.0.0.{{ index }}',
+                    'mask': mask16,
+                },
+                {
                     'name': 'GigabitEthernet 0/0',
-                    'address': '100.{{ index }}.2.{{ index }}',
+                    'address': '10.3.{{ index }}.{{ index }}',
                     'mask': mask24,
                 },
                 {
                     'name': 'GigabitEthernet 0/1',
-                    'address': '100.{{ index }}.4.{{ index }}',
+                    'address': '10.4.{{ index }}.{{ index }}',
                     'mask': mask24,
                 },
             ]
@@ -144,13 +150,18 @@ params = {
                     'mask': mask32,
                 },
                 {
+                    'name': 'Loopback 2',
+                    'address': '50.0.0.{{ index }}',
+                    'mask': mask16,
+                },
+                {
                     'name': 'GigabitEthernet 0/0',
-                    'address': '100.{{ index }}.{{ index }}.{{ index }}',
+                    'address': '100.2.{{ index }}.{{ index }}',
                     'mask': mask24,
                 },
                 {
                     'name': 'GigabitEthernet 0/1',
-                    'address': '100.{{ index }}.{{ index }}.{{ index }}',
+                    'address': '100.1.{{ index }}.{{ index }}',
                     'mask': mask24,
                 },
             ]
