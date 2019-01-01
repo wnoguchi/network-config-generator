@@ -1,0 +1,8 @@
+{% for node in nodes %}
+  * {{ node.hostname }}
+
+<code>
+{{ node.config }}
+</code>
+
+{% endfor %}
