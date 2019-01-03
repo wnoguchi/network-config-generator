@@ -48,12 +48,12 @@ params = {
                 },
                 {
                     'name': 'GigabitEthernet 0/0',
-                    'address': '100.{{ index }}.2.{{ index }}',
+                    'address': '100.{{ index }}.4.{{ index }}',
                     'mask': mask24,
                 },
                 {
                     'name': 'GigabitEthernet 0/1',
-                    'address': '100.{{ index }}.4.{{ index }}',
+                    'address': '100.{{ index }}.6.{{ index }}',
                     'mask': mask24,
                 },
             ]
