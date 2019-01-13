@@ -5,7 +5,7 @@ from jinja2 import Environment, FileSystemLoader, Template
 
 env = Environment(loader=FileSystemLoader('templates/'))
 #env = Environment()
-node_template = env.get_template('cisco/router.j2')
+node_template = env.get_template('cisco/empty.j2')
 output_template = env.get_template('output-templates/dokuwiki.j2')
 
 mask16 = '255.255.0.0'
