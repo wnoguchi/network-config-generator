@@ -5,7 +5,7 @@ from jinja2 import Environment, FileSystemLoader, Template
 
 env = Environment(loader=FileSystemLoader('templates/'))
 #env = Environment()
-node_template = env.get_template('cisco/router.j2')
+node_template = env.get_template('cisco/empty.j2')
 output_template = env.get_template('output-templates/dokuwiki.j2')
 
 mask16 = '255.255.0.0'
@@ -76,12 +76,12 @@ params = {
                 },
                 {
                     'name': 'GigabitEthernet 0/0',
-                    'address': '100.{{ index }}.4.{{ index }}',
+                    'address': '100.2.4.2',
                     'mask': mask24,
                 },
                 {
                     'name': 'GigabitEthernet 0/1',
-                    'address': '100.{{ index }}.6.{{ index }}',
+                    'address': '100.2.6.2',
                     'mask': mask24,
                 },
             ]
