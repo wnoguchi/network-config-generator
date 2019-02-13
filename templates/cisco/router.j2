@@ -6,6 +6,7 @@ no ip domain-lookup
 line console 0
 exec-timeout 0 0
 logging synchronous
+exit
 !
 {% for interface in interfaces -%}
 interface {{ interface.name }}
