@@ -12,198 +12,40 @@ mask16 = '255.255.0.0'
 mask24 = '255.255.255.0'
 mask32 = '255.255.255.255'
 
-params = {
-    'nodes': [
-        {
-            'index': 1,
-            'vendor': 'cisco',
-            'node_type': 'router',
-            'interfaces': [
-                {
-                    'name': 'Loopback 1',
-                    'address': '{{ index }}.{{ index }}.{{ index }}.{{ index }}',
-                    'mask': mask32,
-                },
-                {
-                    'name': 'GigabitEthernet 0/0',
-                    'address': '100.1.6.1',
-                    'mask': mask24,
-                },
-                {
-                    'name': 'GigabitEthernet 0/1',
-                    'address': '100.1.3.1',
-                    'mask': mask24,
-                },
-            ],
-            'routes': [
-                {
-                    'network': '6.6.6.6',
-                    'mask': mask32,
-                    'next_hop': '100.1.6.6',
-                },
-                {
-                    'network': '3.3.3.3',
-                    'mask': mask32,
-                    'next_hop': '100.1.3.3',
-                },
-            ],
-            'router': [
-                {
-                    'routing_protocol': 'bgp',
-                    'as_number': 1,
-                    'neighbors': [
-                        {
-                            'address': '100.1.6.6',
-                            'remote-as': '50'
-                        },
-                        {
-                            'address': '100.1.3.3',
-                            'remote-as': '3'
-                        },
-                    ]
-                }
-            ]
-        },
-        {
-            'index': 2,
-            'vendor': 'cisco',
-            'node_type': 'router',
-            'interfaces': [
-                {
-                    'name': 'Loopback 1',
-                    'address': '{{ index }}.{{ index }}.{{ index }}.{{ index }}',
-                    'mask': mask32,
-                },
-                {
-                    'name': 'GigabitEthernet 0/0',
-                    'address': '100.2.4.2',
-                    'mask': mask24,
-                },
-                {
-                    'name': 'GigabitEthernet 0/1',
-                    'address': '100.2.6.2',
-                    'mask': mask24,
-                },
-            ]
-        },
-        {
-            'index': 3,
-            'vendor': 'cisco',
-            'node_type': 'router',
-            'interfaces': [
-                {
-                    'name': 'Loopback 1',
-                    'address': '{{ index }}.{{ index }}.{{ index }}.{{ index }}',
-                    'mask': mask32,
-                },
-                {
-                    'name': 'GigabitEthernet 0/0',
-                    'address': '100.1.3.3',
-                    'mask': mask24,
-                },
-                {
-                    'name': 'GigabitEthernet 0/1',
-                    'address': '10.3.5.3',
-                    'mask': mask24,
-                },
-                {
-                    'name': 'GigabitEthernet 0/2',
-                    'address': '10.3.4.3',
-                    'mask': mask24,
-                },
-            ]
-        },
-        {
-            'index': 4,
-            'vendor': 'cisco',
-            'node_type': 'router',
-            'interfaces': [
-                {
-                    'name': 'Loopback 1',
-                    'address': '{{ index }}.{{ index }}.{{ index }}.{{ index }}',
-                    'mask': mask32,
-                },
-                {
-                    'name': 'GigabitEthernet 0/0',
-                    'address': '10.4.5.4',
-                    'mask': mask24,
-                },
-                {
-                    'name': 'GigabitEthernet 0/1',
-                    'address': '100.2.4.4',
-                    'mask': mask24,
-                },
-                {
-                    'name': 'GigabitEthernet 0/2',
-                    'address': '10.3.4.4',
-                    'mask': mask24,
-                },
-            ]
-        },
-        {
-            'index': 5,
-            'vendor': 'cisco',
-            'node_type': 'router',
-            'interfaces': [
-                {
-                    'name': 'Loopback 1',
-                    'address': '{{ index }}.{{ index }}.{{ index }}.{{ index }}',
-                    'mask': mask32,
-                },
-                {
-                    'name': 'Loopback 2',
-                    'address': '30.0.0.5',
-                    'mask': mask16,
-                },
-                {
-                    'name': 'GigabitEthernet 0/0',
-                    'address': '10.3.5.5',
-                    'mask': mask24,
-                },
-                {
-                    'name': 'GigabitEthernet 0/1',
-                    'address': '10.4.5.5',
-                    'mask': mask24,
-                },
-            ]
-        },
-        {
-            'index': 6,
-            'vendor': 'cisco',
-            'node_type': 'router',
-            'interfaces': [
-                {
-                    'name': 'Loopback 1',
-                    'address': '{{ index }}.{{ index }}.{{ index }}.{{ index }}',
-                    'mask': mask32,
-                },
-                {
-                    'name': 'Loopback 2',
-                    'address': '50.0.0.6',
-                    'mask': mask16,
-                },
-                {
-                    'name': 'GigabitEthernet 0/0',
-                    'address': '100.2.6.6',
-                    'mask': mask24,
-                },
-                {
-                    'name': 'GigabitEthernet 0/1',
-                    'address': '100.1.6.6',
-                    'mask': mask24,
-                },
-            ]
-        },
-    ]
+number_of_routers = 7
+number_of_loopback_interfaces = 0
+number_of_gigabit_ethernet_interfaces = 0
+
+
+
+# render_params = copy.deepcopy(params)
+
+loBase = 1
+gigBase = 0
+
+render_params = {
+    'nodes': [],
 }
 
-render_params = copy.deepcopy(params)
-
 i = 1
-for node in render_params['nodes']:
+for node in range(number_of_routers):
+    node = {}
+    render_params['nodes'].append(node)
     node['hostname'] = 'R%d' % i
-    for interface in node['interfaces']:
-        interface['address'] = Template(interface['address']).render({'index': i})
+    node['interfaces'] = []
+    interfaceIndex = 0
+    for loIndex in range(number_of_loopback_interfaces):
+        node['interfaces'].append({
+            'name': 'Loopback %d' % (loBase + loIndex),
+            'address': '100.10.%d.1' % (loBase + loIndex),
+            'mask': mask24,
+        })
+    for gigIndex in range(number_of_gigabit_ethernet_interfaces):
+        node['interfaces'].append({
+            'name': 'GigabitEthernet 0/%d' % (gigBase + gigIndex),
+            'address': '0.0.0.0',
+            'mask': mask24,
+        })
     i += 1
 
 output_render_data = copy.deepcopy(render_params)
