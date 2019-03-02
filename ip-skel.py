@@ -13,8 +13,8 @@ mask24 = '255.255.255.0'
 mask32 = '255.255.255.255'
 
 number_of_routers = 4
-number_of_loopback_interfaces = 4
-number_of_gigabit_ethernet_interfaces = 3
+number_of_loopback_interfaces = 0
+number_of_gigabit_ethernet_interfaces = 2
 
 
 
@@ -37,7 +37,7 @@ for node in range(number_of_routers):
     for loIndex in range(number_of_loopback_interfaces):
         node['interfaces'].append({
             'name': 'Loopback %d' % (loBase + loIndex),
-            'address': '0.0.0.0',
+            'address': '100.10.%d.1' % (loBase + loIndex),
             'mask': mask24,
         })
     for gigIndex in range(number_of_gigabit_ethernet_interfaces):
