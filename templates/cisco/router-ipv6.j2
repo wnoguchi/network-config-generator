@@ -8,6 +8,8 @@ exec-timeout 0 0
 logging synchronous
 exit
 !
+ipv6 unicast-routing 
+!
 {% for interface in interfaces -%}
 interface {{ interface.name }}
 ipv6 address {{ interface.ipv6_address_link_local }} link-local

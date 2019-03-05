@@ -10,6 +10,8 @@ env = Environment(loader=FileSystemLoader('templates/'))
 
 #node_template = env.get_template('cisco/router.j2')
 node_template = env.get_template('cisco/router-ipv6.j2')
+#node_template = env.get_template('cisco/empty-intonly.j2')
+
 output_template = env.get_template('output-templates/dokuwiki.j2')
 
 mask16 = '255.255.0.0'

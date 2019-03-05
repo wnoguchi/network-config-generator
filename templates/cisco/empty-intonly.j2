@@ -1,0 +1,11 @@
+enable
+configure terminal
+!
+{% for interface in interfaces -%}
+interface {{ interface.name }}
+
+exit
+{% endfor -%}
+!
+end
+write
