@@ -1,0 +1,6 @@
+{% for interface in interfaces -%}
+network {{ interface.address }} mask {{ interface.mask }}
+{% endfor -%}#}
+{% for ping in pings -%}
+ping {{ ping.address }} source 1.1.1.1
+{% endfor -%}

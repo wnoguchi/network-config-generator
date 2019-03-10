@@ -1,6 +1,14 @@
-{#{% for interface in interfaces -%}
-network {{ interface.address }} mask {{ interface.mask }}
-{% endfor -%}#}
-{% for ping in pings -%}
-ping {{ ping.address }} source 1.1.1.1
-{% endfor -%}
+configure terminal
+!
+ipv6 router ospf 1
+router-id {{ router_id }}
+exit
+!
+interface GigabitEthernet 0/0
+ipv6 ospf 1 area 0
+exit
+interface GigabitEthernet 0/1
+ipv6 ospf 1 area 0
+exit
+!
+end

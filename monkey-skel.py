@@ -12,8 +12,8 @@ mask16 = '255.255.0.0'
 mask24 = '255.255.255.0'
 mask32 = '255.255.255.255'
 
-number_of_routers = 1
-number_of_loopback_interfaces = 20
+number_of_routers = 7
+number_of_loopback_interfaces = 0
 number_of_gigabit_ethernet_interfaces = 0
 general_count = 7
 
@@ -33,6 +33,7 @@ for node in range(number_of_routers):
     node = {}
     render_params['nodes'].append(node)
     node['hostname'] = 'R%d' % i
+    node['router_id'] = '%d.%d.%d.%d' % (i, i, i, i)
     #node['interfaces'] = []
     node['pings'] = []
     interfaceIndex = 0
