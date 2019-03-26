@@ -8,8 +8,8 @@ env = Environment(loader=FileSystemLoader('templates/'))
 
 # Command Line Argument
 
-#node_template = env.get_template('cisco/router.j2')
-node_template = env.get_template('cisco/router-ipv6.j2')
+node_template = env.get_template('cisco/router.j2')
+#node_template = env.get_template('cisco/router-ipv6.j2')
 #node_template = env.get_template('cisco/empty-intonly.j2')
 
 output_template = env.get_template('output-templates/dokuwiki.j2')
@@ -19,7 +19,7 @@ mask24 = '255.255.255.0'
 mask32 = '255.255.255.255'
 ipv6_prefix_length = '64'
 
-number_of_routers = 5
+number_of_routers = 4
 number_of_loopback_interfaces = 0
 number_of_gigabit_ethernet_interfaces = 2
 
